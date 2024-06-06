@@ -28,5 +28,19 @@ pipeline {
         sh 'docker build -t cbabu85/banking-apps:1.0 .'
                           }
             }
-        }
+    stage('Docker-Login') {
+      steps {
+        withCredentials([usernamePassword(credentialsId: 'Docker-Login-ID', passwordVariable: 'docker-pass', usernameVariable: 'docker-login')]) {
+        sh 'docker login -u ${docker-login} -p ${docker-pass}'
+              }
+                          }
+            }
+    stage('Docker Push-Image') {
+      steps {
+        echo 'This stage will push my new image to the dockerhub'
+        sh 'docker push cbabu85/banking-apps:1.0'
+            }
+                              }
+       }
 }
+  
