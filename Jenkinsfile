@@ -47,12 +47,15 @@ pipeline {
                               }
     stage('CreateNew Server then configure and Deploy') {
       steps {
-        dir('terraform-files') {
+        withCredentials([aws(accessKeyVariable: 'AWS_ACCESS_KEY_ID', credentialsId: 'awscredentials', secretKeyVariable: 'AWS_SECRET_ACCESS_KEY')]) {
+          dir('terraform-files') {
           sh 'sudo chmod 600 newkeypairaws.pem'
           sh 'terraform init'
           sh 'terraform validate'
           sh 'terraform apply --auto-approve'
                                                     }
+}
+      
                                }
                    }
        }
