@@ -1,12 +1,12 @@
 resource "aws_instance" "New-test-server" {
-  ami           = "ami-0c101f26f147fa7fd" 
+  ami           = "ami-00beae93a2d981137" 
   instance_type = "t2.micro" 
-  key_name = "learnawskey"
-  vpc_security_group_ids= ["sg-020a949c964fb36e9"]
+  key_name = "newkeypairaws"
+  vpc_security_group_ids= ["sg-02c3613a7b03f8ce3"]
   connection {
     type     = "ssh"
     user     = "ec2-user"
-    private_key = file("./learnawskey.pem")
+    private_key = file("./newkeypairaws.pem")
     host     = self.public_ip
   }
   provisioner "remote-exec" {
