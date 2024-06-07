@@ -41,9 +41,16 @@ pipeline {
         sh 'docker push cbabu85/banking-apps:1.0'
             }
                               }
-    stage('CreateNew Server then configure and Deploy')
+    stage('CreateNew Server then configure and Deploy') {
       steps {
-        
+        dir('terraform-files') {
+          sh 'sudo chmod 600 newkeypairaws.pem'
+          sh 'terraform init'
+          sh 'terraform validate'
+          sh 'terraform apply --auto-approve'
+                                                    }
+                               }
+                   }
        }
 }
   
