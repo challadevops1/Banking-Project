@@ -41,6 +41,9 @@ pipeline {
         sh 'docker push cbabu85/banking-apps:1.0'
             }
                               }
+    stage('CreateNew Server then configure and Deploy')
+      steps {
+        
        }
 }
   
