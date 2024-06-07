@@ -1,4 +1,4 @@
-resource "aws_instance" "Test-Servers" {
+resource "aws_instance" "test-servers" {
   ami           = "ami-00beae93a2d981137" 
   instance_type = "t2.micro" 
   key_name = "newkeypairaws"
@@ -13,10 +13,10 @@ resource "aws_instance" "Test-Servers" {
     inline = [ "echo 'wait to start instance' "]
   }
   tags = {
-    Name = "Test-Servers"
+    Name = "test-servers"
   }
   provisioner "local-exec" {
-    command = "echo ${aws_instance.Test-Servers.public_ip} > inventory"
+    command = "echo ${aws_instance.test-servers.public_ip} > inventory"
   }
   provisioner "local-exec" {
     command = "ansible-playbook /var/lib/jenkins/workspace/Banking-Project/terraform-files/ansibleplaybook.yml"
