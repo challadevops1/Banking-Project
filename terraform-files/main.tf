@@ -1,4 +1,4 @@
-resource "aws_instance" "New-test-server" {
+resource "aws_instance" "Test-Server" {
   ami           = "ami-00beae93a2d981137" 
   instance_type = "t2.micro" 
   key_name = "newkeypairaws"
@@ -13,7 +13,7 @@ resource "aws_instance" "New-test-server" {
     inline = [ "echo 'wait to start instance' "]
   }
   tags = {
-    Name = "New-test-server"
+    Name = "Test-Server"
   }
   provisioner "local-exec" {
     command = "echo ${aws_instance.New-test-server.public_ip} > inventory"
