@@ -3,10 +3,7 @@ pipeline {
      tools {
        maven 'M2_HOME'
            }
-//  environment {
-//        AWS_ACCESS_KEY_ID     = "AKIA47CRZW64VK7DIPUY"
-//        AWS_SECRET_ACCESS_KEY = "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"
-//  } 
+ 
   stages {
     stage('Git Checkout') {
       steps {
@@ -47,12 +44,13 @@ pipeline {
                               }
     stage('CreateNew Server then configure and Deploy') {
       steps {
+        withCredentials([aws(accessKeyVariable: 'AWS_ACCESS_KEY_ID', credentialsId: 'awscredentials', secretKeyVariable: 'AWS_SECRET_ACCESS_KEY')]) {
           dir('terraform-files') {
           sh 'sudo chmod 600 newkeypairaws.pem'
           sh 'terraform init'
           sh 'terraform validate'
           sh 'terraform apply --auto-approve'
-                                                    
+                                        }            
                                 }
       
                                }
