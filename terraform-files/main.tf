@@ -1,6 +1,6 @@
 resource "aws_instance" "test-servers" {
   ami           = "ami-00beae93a2d981137" 
-  instance_type = "t2.micro" 
+  instance_type = "t2.nano" 
   key_name = "newkeypairaws"
   vpc_security_group_ids= ["sg-02c3613a7b03f8ce3"]
   connection {
