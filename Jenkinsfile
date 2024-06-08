@@ -9,7 +9,7 @@ pipeline {
       steps {
         echo 'This stage is to clone the repo from github'
         git branch: 'main', url: 'https://github.com/challadevops1/Banking-Project.git'
-                          }
+                        }
             }
     stage('Create Package') {
       steps {
